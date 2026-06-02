@@ -2,7 +2,8 @@ name: Build Android APK From ZIP
 
 on:
   push:
-    branches: [ "main", "رئيسي" ]
+    branches:
+      - '*'
   workflow_dispatch:
 
 jobs:
@@ -44,10 +45,9 @@ jobs:
         if [ -f "gradlew" ]; then
           chmod +x gradlew
         else
-          echo "gradlew not found in root, searching..."
           GRADLEW_PATH=$(find . -name gradlew | head -n 1)
           if [ -z "$GRADLEW_PATH" ]; then
-            echo "Error: gradlew not found anywhere!"
+            echo "Error: gradlew not found!"
             exit 1
           fi
           cd $(dirname "$GRADLEW_PATH")
